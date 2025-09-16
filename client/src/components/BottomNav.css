@@ -1,0 +1,39 @@
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background: #181818;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #232323;
+  z-index: 100;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.85rem;
+  flex: 1;
+  height: 100%;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.nav-btn.active,
+.nav-btn:focus,
+.nav-btn:hover {
+  color: #1db954;
+}
+
+.material-icons {
+  font-size: 1.7rem;
+  margin-bottom: 2px;
+}

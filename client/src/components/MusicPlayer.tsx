@@ -1,9 +1,16 @@
 import React, { useRef, useEffect } from 'react';
-import { MusicFile } from '../App';
+// import { MusicFile } from '../App';
 import './MusicPlayer.css';
 
+
 interface MusicPlayerProps {
-  track: MusicFile;
+  track: {
+    title: string;
+    artist: string;
+    audio_url: string;
+    cover_url: string;
+    [key: string]: any;
+  };
   isPlaying: boolean;
   onTogglePlay: () => void;
   onTimeUpdate: (currentTime: number, duration: number) => void;

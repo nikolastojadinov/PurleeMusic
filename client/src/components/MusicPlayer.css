@@ -1,9 +1,109 @@
+
 .music-player {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
+  background-color: #232323;
+  border-radius: 16px;
+  padding: 28px 24px 20px 24px;
+  margin-top: 0;
+  box-shadow: 0 2px 8px #00000022;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  gap: 32px;
+}
+
+.play-pause-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: #1db954;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px #1db95422;
+}
+
+.play-pause-btn:hover {
+  transform: scale(1.07);
+  background: #1ed760;
+  color: #181818;
+}
+
+.play-pause-btn:active {
+  transform: scale(0.95);
+}
+
+.play-pause-btn.playing {
+  background: #1ed760;
+  color: #181818;
+}
+
+.player-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.time-current,
+.time-total {
+  font-size: 0.95rem;
+  color: #b3b3b3;
+  min-width: 45px;
+  text-align: center;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #404040;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1db954;
+  cursor: pointer;
+  box-shadow: 0 2px 6px #1db95444;
+  transition: all 0.2s;
+}
+
+.progress-bar::-webkit-slider-thumb:hover {
+  background: #1ed760;
+  transform: scale(1.1);
+}
+
+.progress-bar::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1db954;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px #1db95444;
+}
+
+.progress-bar::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: #404040;
+  border: none;
 }
 
 .player-controls {
@@ -12,6 +112,8 @@
   margin-bottom: 20px;
 }
 
+  margin-bottom: 24px;
+  gap: 32px;
 .play-pause-btn {
   width: 60px;
   height: 60px;
@@ -29,12 +131,19 @@
 }
 
 .play-pause-btn:hover {
+  background: #1db954;
+  color: #fff;
+  font-size: 2rem;
+  box-shadow: 0 4px 15px #1db95422;
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .play-pause-btn:active {
   transform: scale(0.95);
+  transform: scale(1.07);
+  background: #1ed760;
+  color: #181818;
 }
 
 .play-pause-btn.playing {
@@ -46,6 +155,7 @@
   align-items: center;
   gap: 12px;
 }
+  margin-top: 12px;
 
 .time-current,
 .time-total {
@@ -55,6 +165,8 @@
   text-align: center;
 }
 
+  font-size: 0.95rem;
+  color: #b3b3b3;
 .progress-bar {
   flex: 1;
   height: 6px;
@@ -66,6 +178,7 @@
 }
 
 .progress-bar::-webkit-slider-thumb {
+  background: #404040;
   -webkit-appearance: none;
   width: 16px;
   height: 16px;
@@ -78,6 +191,8 @@
 
 .progress-bar::-webkit-slider-thumb:hover {
   background: #5a67d8;
+  background: #1db954;
+  box-shadow: 0 2px 6px #1db95444;
   transform: scale(1.1);
 }
 
@@ -89,6 +204,7 @@
   cursor: pointer;
   border: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  background: #1db954;
 }
 
 .progress-bar::-moz-range-track {
@@ -97,3 +213,4 @@
   background: rgba(255, 255, 255, 0.2);
   border: none;
 }
+  background: #404040;

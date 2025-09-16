@@ -1,17 +1,8 @@
 import React from 'react';
-import { PlayerState } from '../App';
-import './NowPlaying.css';
-
-interface NowPlayingProps {
-  playerState: PlayerState;
-}
-
-const NowPlaying: React.FC<NowPlayingProps> = ({ playerState }) => {
-  const { currentTrack, isPlaying, currentTime, duration } = playerState;
-
-  if (!currentTrack) {
-    return null;
-  }
+// import { PlayerState } from '../App';
+const NowPlaying: React.FC<{ playerState: any }> = ({ playerState }) => {
+  const { currentTrack, currentTime, duration } = playerState;
+  if (!currentTrack) return null;
 
   const getDisplayName = (filename: string) => {
     return filename
@@ -19,30 +10,21 @@ const NowPlaying: React.FC<NowPlayingProps> = ({ playerState }) => {
       .replace(/[_-]/g, ' ')
       .replace(/\b\w/g, l => l.toUpperCase());
   };
-
   const formatTime = (time: number) => {
     if (isNaN(time)) return '0:00';
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
-
-  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
-
   return (
     <div className="now-playing">
-      <div className="now-playing-header">
-        <h3>Now Playing</h3>
-        <div className={`status-indicator ${isPlaying ? 'playing' : 'paused'}`}>
-          {isPlaying ? '🎵' : '⏸️'}
-        </div>
+      <div className="album-artwork">
+        <img src="/logo512.png" alt="Album Art" />
       </div>
-      
       <div className="track-details">
         <div className="track-title">{getDisplayName(currentTrack.name)}</div>
-        <div className="track-filename">{currentTrack.name}</div>
+        <div className="track-artist">Unknown Artist</div>
       </div>
-
       <div className="progress-info">
         <div className="time-display">
           <span>{formatTime(currentTime)}</span>
@@ -51,7 +33,7 @@ const NowPlaying: React.FC<NowPlayingProps> = ({ playerState }) => {
         <div className="progress-visual">
           <div 
             className="progress-fill"
-            style={{ width: `${progressPercentage}%` }}
+            style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
           />
         </div>
       </div>
