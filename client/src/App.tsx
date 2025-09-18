@@ -73,29 +73,33 @@ function App() {
       </main>
       {/* FOOTER NAV */}
       <footer className="pm-footer-nav" style={{
-        width:'100%',
-        background:'#111',
-        borderTop:'1.5px solid #232323',
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center',
-        gap:'2.5rem',
-        padding:'0.7rem 0 0.3rem 0',
-        position:'sticky',
-        bottom:0,
-        zIndex:99,
+        width: '100%',
+        background: '#111',
+        borderTop: '1.5px solid #232323',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        padding: '0.2rem 0 0.1rem 0',
+        position: 'sticky',
+        bottom: 0,
+        zIndex: 99,
+        height: '64px',
       }}>
-        <Link to="/" className={location.pathname==='/' ? 'pm-footer-icon active' : 'pm-footer-icon'} title="Home" style={{textDecoration:'none'}}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12L12 3l9 9"/><path d="M9 21V9h6v12"/></svg>
+        <Link to="/" className={location.pathname==='/' ? 'pm-footer-icon active' : 'pm-footer-icon'} style={{textDecoration:'none',flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'2px'}}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: location.pathname==='/' ? '#a259ff' : '#b3b3b3'}}><path d="M3 12L12 3l9 9"/><path d="M9 21V9h6v12"/></svg>
+          <span style={{fontSize:'0.82rem',marginTop:1,fontWeight:500,color: location.pathname==='/' ? '#a259ff' : '#b3b3b3'}}>Home</span>
         </Link>
-        <Link to="/search" className={location.pathname==='/search' ? 'pm-footer-icon active' : 'pm-footer-icon'} title="Search" style={{textDecoration:'none'}}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <Link to="/search" className={location.pathname==='/search' ? 'pm-footer-icon active' : 'pm-footer-icon'} style={{textDecoration:'none',flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'2px'}}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: location.pathname==='/search' ? '#a259ff' : '#b3b3b3'}}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span style={{fontSize:'0.82rem',marginTop:1,fontWeight:500,color: location.pathname==='/search' ? '#a259ff' : '#b3b3b3'}}>Search</span>
         </Link>
-        <Link to="/liked" className={location.pathname==='/liked' ? 'pm-footer-icon active' : 'pm-footer-icon'} title="Liked Songs" style={{textDecoration:'none'}}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <Link to="/playlists" className={location.pathname==='/playlists' ? 'pm-footer-icon active' : 'pm-footer-icon'} style={{textDecoration:'none',flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'2px'}}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: location.pathname==='/playlists' ? '#a259ff' : '#b3b3b3'}}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+          <span style={{fontSize:'0.82rem',marginTop:1,fontWeight:500,color: location.pathname==='/playlists' ? '#a259ff' : '#b3b3b3'}}>Library</span>
         </Link>
-        <Link to="/playlists" className={location.pathname==='/playlists' ? 'pm-footer-icon active' : 'pm-footer-icon'} title="My Playlists" style={{textDecoration:'none'}}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+        <Link to="/liked" className={location.pathname==='/liked' ? 'pm-footer-icon active' : 'pm-footer-icon'} style={{textDecoration:'none',flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'2px'}}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: location.pathname==='/liked' ? '#a259ff' : '#b3b3b3'}}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span style={{fontSize:'0.82rem',marginTop:1,fontWeight:500,color: location.pathname==='/liked' ? '#a259ff' : '#b3b3b3'}}>Liked Songs</span>
         </Link>
       </footer>
     </div>

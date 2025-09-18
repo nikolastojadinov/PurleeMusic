@@ -40,10 +40,6 @@ const songs = [
 const MusicList: React.FC = () => {
   return (
     <div className="home-hero-wrap">
-      <section className="hero-section">
-        <h1 className="hero-title">PurpleMusic</h1>
-        <p className="hero-slogan">Stream your favorite beats. Modern. Minimal. Free.</p>
-      </section>
       <section className="featured-section">
         <h2 className="featured-title">Featured playlists</h2>
         <div className="featured-grid">
