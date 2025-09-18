@@ -1,0 +1,11 @@
+[redirects]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+[build]
+  command = "npm run build"
+  publish = "client/build"
+
+[dev]
+  command = "npm start"
+  publish = "client/build"

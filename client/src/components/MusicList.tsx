@@ -1,6 +1,7 @@
 import React from "react";
 import "./MusicList.css";
 
+
 const songs = [
   {
     title: "Retro Lounge",
@@ -38,17 +39,26 @@ const songs = [
 
 const MusicList: React.FC = () => {
   return (
-    <div className="music-grid">
-      {songs.map((song, idx) => (
-        <div className="music-card" key={idx}>
-          <img className="music-cover" src={song.cover_url} alt={song.title} />
-          <div className="music-info">
-            <div className="music-title">{song.title}</div>
-            <div className="music-artist">{song.artist}</div>
-          </div>
-          <audio className="music-audio" controls src={song.audio_url} preload="none" />
+    <div className="home-hero-wrap">
+      <section className="hero-section">
+        <h1 className="hero-title">PurpleMusic</h1>
+        <p className="hero-slogan">Stream your favorite beats. Modern. Minimal. Free.</p>
+      </section>
+      <section className="featured-section">
+        <h2 className="featured-title">Featured playlists</h2>
+        <div className="featured-grid">
+          {songs.map((song, idx) => (
+            <div className="music-card" key={idx}>
+              <img className="music-cover" src={song.cover_url} alt={song.title} />
+              <div className="music-info">
+                <div className="music-title">{song.title}</div>
+                <div className="music-artist">{song.artist}</div>
+              </div>
+              <audio className="music-audio" controls src={song.audio_url} preload="none" />
+            </div>
+          ))}
         </div>
-      ))}
+      </section>
     </div>
   );
 };
