@@ -86,24 +86,24 @@ const MusicList: React.FC = () => {
     <div className="home-hero-wrap">
       <section className="music-section">
         <h2 className="music-section-title">Recently Played</h2>
-         <div className="music-horizontal-list" style={{display:'flex',overflowX:'auto',gap:'1.5rem',padding:'0.5rem 0 1.2rem 0'}}>
+        <div className="music-horizontal-list" style={{display:'flex',overflowX:'auto',gap:'16px',padding:'0.5rem 0 1.2rem 0'}}>
           {recentlyPlayed.map((song, idx) => (
-             <div className="music-h-card" key={idx} style={{display:'flex',flexDirection:'column',alignItems:'center',minWidth:130}}>
+            <div className="music-h-card" key={idx} style={{display:'flex',flexDirection:'column',alignItems:'center',minWidth:150}}>
               <div
                 className="music-h-cover-wrap"
-                 style={{width:120,height:120,marginBottom:10,cursor:'pointer',borderRadius:16,overflow:'hidden',boxShadow:'0 2px 16px #0007'}}
+                style={{width:150,height:150,marginBottom:10,cursor:'pointer',borderRadius:8,overflow:'hidden',boxShadow:'0 2px 16px #0007'}}
                 onClick={() => openPlayerWithTrack && openPlayerWithTrack(song)}
               >
                 <img
                   className="music-h-cover"
                   src={song.cover_url}
                   alt={song.title}
-                   style={{width:120,height:120,objectFit:'cover',borderRadius:16,display:'block'}}
+                  style={{width:150,height:150,objectFit:'cover',borderRadius:8,display:'block'}}
                 />
               </div>
               <div className="music-h-info" style={{width:'100%',textAlign:'center',marginTop:2}}>
-                <div className="music-h-title" style={{fontWeight:600,fontSize:'1.01rem',color:'#fff',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:120}}>{song.title}</div>
-                <div className="music-h-artist" style={{fontWeight:400,fontSize:'0.93rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:120}}>{song.artist}</div>
+                <div className="music-h-title" style={{fontWeight:600,fontSize:'1.01rem',color:'#fff',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:150}}>{song.title}</div>
+                <div className="music-h-artist" style={{fontWeight:400,fontSize:'0.93rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:150}}>{song.artist}</div>
               </div>
             </div>
           ))}
