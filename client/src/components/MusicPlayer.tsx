@@ -196,7 +196,7 @@ const MusicPlayer: React.FC = () => {
       {/* Top right: Fullscreen/Minimize & Close (reverse order) */}
       <div style={{position:'absolute',top:fullscreen?24:8,right:fullscreen?32:12,display:'flex',gap:fullscreen?18:10,zIndex:10}}>
         {fullscreen ? (
-          <button onClick={()=>setFullscreen(false)} style={{background:'none',border:'none',color:'#fff',fontSize:32,cursor:'pointer',opacity:0.85,padding:8,lineHeight:1}} title="Minimize" aria-label="Minimize">🗕</button>
+          <button onClick={()=>setFullscreen(false)} style={{background:'none',border:'none',color:'#fff',fontSize:44,cursor:'pointer',opacity:0.85,padding:8,lineHeight:1}} title="Minimize" aria-label="Minimize">―</button>
         ) : (
           <button onClick={()=>setFullscreen(true)} style={{background:'none',border:'none',color:'#fff',fontSize:22,cursor:'pointer',opacity:0.85,padding:4,lineHeight:1}} title="Fullscreen" aria-label="Fullscreen">⛶</button>
         )}
