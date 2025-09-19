@@ -77,7 +77,7 @@ const MusicList: React.FC = () => {
       </button>
     );
   }
-  const { playSong, currentSong, isPlaying, resume } = usePlayer();
+  const { playSong, currentSong, isPlaying } = usePlayer();
 
 
   // Renderuje samo ikonu, bez play dugmeta, za Recently Played
