@@ -94,7 +94,7 @@
 /* Sticky modern player */
 .music-player.sticky-player {
   width: 100%;
-  background: rgba(32,32,36,0.82);
+  background: rgba(60,60,70,0.68);
   color: #fff;
   box-shadow: 0 -2px 16px #0008;
   position: sticky;
