@@ -117,7 +117,7 @@ const MusicList: React.FC = () => {
               <img
                 className="music-h-cover"
                 src={song.cover_url}
-                alt={song.title}
+
                 style={{
                   width: 44,
                   height: 44,
