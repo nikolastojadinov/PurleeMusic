@@ -193,58 +193,103 @@ const MusicPlayer: React.FC = () => {
         onEnded={handleNext}
         preload="metadata"
       />
-      {/* Top right: Close & Fullscreen/Minimize */}
+      {/* Top right: Fullscreen/Minimize & Close (reverse order) */}
       <div style={{position:'absolute',top:fullscreen?24:8,right:fullscreen?32:12,display:'flex',gap:fullscreen?18:10,zIndex:10}}>
-        <button onClick={()=>setVisible(false)} style={{background:'none',border:'none',color:'#fff',fontSize:fullscreen?32:22,cursor:'pointer',opacity:0.85,padding:fullscreen?8:4,lineHeight:1}} title="Close" aria-label="Close">✕</button>
         {fullscreen ? (
           <button onClick={()=>setFullscreen(false)} style={{background:'none',border:'none',color:'#fff',fontSize:32,cursor:'pointer',opacity:0.85,padding:8,lineHeight:1}} title="Minimize" aria-label="Minimize">🗕</button>
         ) : (
           <button onClick={()=>setFullscreen(true)} style={{background:'none',border:'none',color:'#fff',fontSize:22,cursor:'pointer',opacity:0.85,padding:4,lineHeight:1}} title="Fullscreen" aria-label="Fullscreen">⛶</button>
         )}
+        <button onClick={()=>setVisible(false)} style={{background:'none',border:'none',color:'#fff',fontSize:fullscreen?32:22,cursor:'pointer',opacity:0.85,padding:fullscreen?8:4,lineHeight:1}} title="Close" aria-label="Close">✕</button>
       </div>
-      <div className="player-main-row" style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:fullscreen?'2.5rem 3.5rem 1.2rem 3.5rem':'0.5rem 1.2rem 0.2rem 1.2rem',gap:fullscreen?'2.5rem':'1.2rem',width:'100%'}}>
-        {/* Left: Cover + info */}
-        <div className="player-left" style={{display:'flex',alignItems:'center',gap:fullscreen?'2.2rem':'0.9rem',minWidth:0}}>
-          <img src={currentSong.cover_url} alt={currentSong.title} style={{width:fullscreen?180:48,height:fullscreen?180:48,borderRadius:fullscreen?18:8,objectFit:'cover',boxShadow:'0 2px 16px #000a'}} />
-          <div style={{display:'flex',flexDirection:'column',minWidth:0}}>
-            <span style={{fontWeight:700,fontSize:fullscreen?'2.1rem':'1.08rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1}}>{currentSong.title}</span>
-            <span style={{fontWeight:500,fontSize:fullscreen?'1.5rem':'0.98rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{currentSong.artist}</span>
+      {fullscreen ? (
+        <>
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start',width:'100%',height:'100%',paddingTop:'6vh'}}>
+            <img src={currentSong.cover_url} alt={currentSong.title} style={{width:320,height:320,borderRadius:28,objectFit:'cover',boxShadow:'0 4px 32px #000a',marginBottom:'2.5rem'}} />
+            <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginBottom:'2.2rem'}}>
+              <span style={{fontWeight:700,fontSize:'2.5rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1,textAlign:'center'}}>{currentSong.title}</span>
+              <span style={{fontWeight:500,fontSize:'1.7rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',textAlign:'center'}}>{currentSong.artist}</span>
+            </div>
+            <div className="player-controls" style={{display:'flex',alignItems:'center',gap:'2.2rem',justifyContent:'center',marginBottom:'2.2rem'}}>
+              <button className="player-btn volume-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} tabIndex={-1}>
+                <Icon.Volume />
+              </button>
+              <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} style={{width:200,marginRight:24,accentColor:'#a259ff'}} />
+              <button className="player-btn heart-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handleLike} aria-label="Like">
+                <Icon.Heart filled={isLiked} />
+              </button>
+              <button className="player-btn prev-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handlePrev} disabled={currentIdx<=0} aria-label="Previous">
+                <Icon.Prev />
+              </button>
+              <button className="player-btn play-pause-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem',margin:'0 0.2rem'}} onClick={isPlaying ? pause : resume} aria-label={isPlaying ? 'Pause' : 'Play'}>
+                {isPlaying ? <Icon.Pause animate={animatePlay} /> : <Icon.Play animate={animatePlay} />}
+              </button>
+              <button className="player-btn next-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handleNext} disabled={currentIdx>=playlist.length-1} aria-label="Next">
+                <Icon.Next />
+              </button>
+            </div>
+            <div className="player-progress" style={{display:'flex',alignItems:'center',gap:'28px',width:'100%',maxWidth:600,margin:'0 auto'}}>
+              <span className="time-current" style={{fontSize:'1.5rem',color:'#fff',minWidth:70,textAlign:'center'}}>{formatTime(currentTime)}</span>
+              <input
+                type="range"
+                className="progress-bar"
+                min="0"
+                max={duration}
+                value={currentTime}
+                onChange={handleSeek}
+                style={{flex:1,accentColor:'#a259ff',height:18,borderRadius:9,background:'#232323'}}
+              />
+              <span className="time-total" style={{fontSize:'1.5rem',color:'#fff',minWidth:70,textAlign:'center'}}>{formatTime(duration)}</span>
+            </div>
           </div>
-        </div>
-        {/* Right: Controls */}
-        <div className="player-controls" style={{display:'flex',alignItems:'center',gap:fullscreen?'1.5rem':'0.7rem',flex:1,justifyContent:'flex-end'}}>
-          <button className="player-btn volume-btn" style={{background:'none',border:'none',cursor:'pointer',padding:fullscreen?'.7rem':'.3rem'}} tabIndex={-1}>
-            <Icon.Volume />
-          </button>
-          <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} style={{width:fullscreen?180:60,marginRight:fullscreen?18:8,accentColor:'#a259ff'}} />
-          <button className="player-btn heart-btn" style={{background:'none',border:'none',cursor:'pointer',padding:fullscreen?'.7rem':'.3rem'}} onClick={handleLike} aria-label="Like">
-            <Icon.Heart filled={isLiked} />
-          </button>
-          <button className="player-btn prev-btn" style={{background:'none',border:'none',cursor:'pointer',padding:fullscreen?'.7rem':'.3rem'}} onClick={handlePrev} disabled={currentIdx<=0} aria-label="Previous">
-            <Icon.Prev />
-          </button>
-          <button className="player-btn play-pause-btn" style={{background:'none',border:'none',cursor:'pointer',padding:fullscreen?'.7rem':'.3rem',margin:'0 0.2rem'}} onClick={isPlaying ? pause : resume} aria-label={isPlaying ? 'Pause' : 'Play'}>
-            {isPlaying ? <Icon.Pause animate={animatePlay} /> : <Icon.Play animate={animatePlay} />}
-          </button>
-          <button className="player-btn next-btn" style={{background:'none',border:'none',cursor:'pointer',padding:fullscreen?'.7rem':'.3rem'}} onClick={handleNext} disabled={currentIdx>=playlist.length-1} aria-label="Next">
-            <Icon.Next />
-          </button>
-        </div>
-      </div>
-      {/* Progress bar */}
-      <div className="player-progress" style={{display:'flex',alignItems:'center',gap:fullscreen?'22px':'10px',padding:fullscreen?'0.7rem 3.5rem 2.5rem 3.5rem':'0.2rem 1.2rem 0.7rem 1.2rem',width:'100%'}}>
-        <span className="time-current" style={{fontSize:fullscreen?'1.3rem':'0.98rem',color:'#fff',minWidth:fullscreen?70:44,textAlign:'center'}}>{formatTime(currentTime)}</span>
-        <input
-          type="range"
-          className="progress-bar"
-          min="0"
-          max={duration}
-          value={currentTime}
-          onChange={handleSeek}
-          style={{flex:1,accentColor:'#a259ff',height:fullscreen?14:6,borderRadius:fullscreen?7:3,background:'#232323'}}
-        />
-        <span className="time-total" style={{fontSize:fullscreen?'1.3rem':'0.98rem',color:'#fff',minWidth:fullscreen?70:44,textAlign:'center'}}>{formatTime(duration)}</span>
-      </div>
+        </>
+      ) : (
+        <>
+          <div className="player-main-row" style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'1.1rem 1.6rem 0.7rem 1.6rem',gap:'1.5rem',width:'100%'}}>
+            {/* Left: Cover + info */}
+            <div className="player-left" style={{display:'flex',alignItems:'center',gap:'1.2rem',minWidth:0}}>
+              <img src={currentSong.cover_url} alt={currentSong.title} style={{width:60,height:60,borderRadius:10,objectFit:'cover',boxShadow:'0 2px 16px #000a'}} />
+              <div style={{display:'flex',flexDirection:'column',minWidth:0}}>
+                <span style={{fontWeight:700,fontSize:'1.18rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1}}>{currentSong.title}</span>
+                <span style={{fontWeight:500,fontSize:'1.05rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{currentSong.artist}</span>
+              </div>
+            </div>
+            {/* Right: Controls */}
+            <div className="player-controls" style={{display:'flex',alignItems:'center',gap:'1rem',flex:1,justifyContent:'flex-end'}}>
+              <button className="player-btn volume-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} tabIndex={-1}>
+                <Icon.Volume />
+              </button>
+              <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} style={{width:80,marginRight:12,accentColor:'#a259ff'}} />
+              <button className="player-btn heart-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} onClick={handleLike} aria-label="Like">
+                <Icon.Heart filled={isLiked} />
+              </button>
+              <button className="player-btn prev-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} onClick={handlePrev} disabled={currentIdx<=0} aria-label="Previous">
+                <Icon.Prev />
+              </button>
+              <button className="player-btn play-pause-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem',margin:'0 0.2rem'}} onClick={isPlaying ? pause : resume} aria-label={isPlaying ? 'Pause' : 'Play'}>
+                {isPlaying ? <Icon.Pause animate={animatePlay} /> : <Icon.Play animate={animatePlay} />}
+              </button>
+              <button className="player-btn next-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} onClick={handleNext} disabled={currentIdx>=playlist.length-1} aria-label="Next">
+                <Icon.Next />
+              </button>
+            </div>
+          </div>
+          {/* Progress bar */}
+          <div className="player-progress" style={{display:'flex',alignItems:'center',gap:'14px',padding:'0.4rem 1.6rem 1.1rem 1.6rem',width:'100%'}}>
+            <span className="time-current" style={{fontSize:'1.08rem',color:'#fff',minWidth:50,textAlign:'center'}}>{formatTime(currentTime)}</span>
+            <input
+              type="range"
+              className="progress-bar"
+              min="0"
+              max={duration}
+              value={currentTime}
+              onChange={handleSeek}
+              style={{flex:1,accentColor:'#a259ff',height:8,borderRadius:4,background:'#232323'}}
+            />
+            <span className="time-total" style={{fontSize:'1.08rem',color:'#fff',minWidth:50,textAlign:'center'}}>{formatTime(duration)}</span>
+          </div>
+        </>
+      )}
     </div>
   );
 };

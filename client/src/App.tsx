@@ -20,7 +20,9 @@ function App() {
       {/* HEADER */}
       <header className="pm-header" style={{
         width: '100%',
-        background: 'transparent',
+        background: 'rgba(40,40,48,0.72)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -78,7 +80,9 @@ function App() {
       {/* FOOTER NAV */}
       <footer className="pm-footer-nav" style={{
         width: '100%',
-        background: '#111',
+        background: 'rgba(40,40,48,0.72)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
         borderTop: '1.5px solid #232323',
         display: 'flex',
         alignItems: 'center',
