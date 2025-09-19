@@ -78,7 +78,7 @@ const MusicList: React.FC = () => {
       </button>
     );
   }
-  const { currentSong, isPlaying } = usePlayer();
+  // const { currentSong, isPlaying } = usePlayer();
 
 
 
