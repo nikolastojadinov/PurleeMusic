@@ -80,7 +80,7 @@ const MusicPlayer: React.FC = () => {
       // @ts-ignore
       if (typeof window !== 'undefined' && window.__setCurrentSong) window.__setCurrentSong(null);
     }
-  }, [visible]);
+  }, [visible, currentSong]);
 
   // Kada se player zatvori, resetuj currentSong da bi playSong uvek radio
   useEffect(() => {
