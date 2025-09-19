@@ -1,3 +1,16 @@
+/* Sakrij horizontalni scroll na mobilnim uređajima i globalno */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Sakrij scrollbar za horizontalne liste */
+.scroll-row {
+  -ms-overflow-style: none;  /* IE i Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scroll-row::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari */
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
