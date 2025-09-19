@@ -1,5 +1,60 @@
 @media (max-width: 600px) {
   .music-player.sticky-player {
+    min-height: 108px;
+    padding: 0 !important;
+  }
+  .player-main-row.mobile-two-rows {
+    display: block !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+  .player-top-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.7rem !important;
+    padding: 0.7rem 0.7rem 0 0.7rem !important;
+  }
+  .player-bottom-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.5rem !important;
+    padding: 0.2rem 0.7rem 0 0.7rem !important;
+  }
+  .mobile-cover {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 7px !important;
+    box-shadow: 0 2px 12px #000a !important;
+  }
+  .mobile-title {
+    font-size: 1.01rem !important;
+  }
+  .mobile-artist {
+    font-size: 0.91rem !important;
+  }
+  .player-controls button, .player-bottom-row button {
+    padding: 0.18rem !important;
+  }
+  .player-controls, .player-bottom-row {
+    gap: 0.38rem !important;
+  }
+  .player-progress {
+    gap: 7px !important;
+    padding: 0.18rem 0.7rem 1.1rem 0.7rem !important;
+  }
+  .player-progress .time-current,
+  .player-progress .time-total {
+    font-size: 0.91rem !important;
+    min-width: 32px !important;
+  }
+  .progress-bar {
+    height: 5px !important;
+    border-radius: 2.5px !important;
+  }
+}
+@media (max-width: 600px) {
+  .music-player.sticky-player {
     min-height: 92px;
     padding: 0 !important;
   }

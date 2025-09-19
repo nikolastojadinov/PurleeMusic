@@ -245,38 +245,36 @@ const MusicPlayer: React.FC = () => {
         </>
       ) : (
         <>
-          <div className="player-main-row" style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'1.1rem 1.6rem 0.7rem 1.6rem',gap:'1.5rem',width:'100%'}}>
-            {/* Left: Cover + info */}
-            <div className="player-left" style={{display:'flex',alignItems:'center',gap:'1.2rem',minWidth:0}}>
-              <img src={currentSong.cover_url} alt={currentSong.title} style={{width:60,height:60,borderRadius:10,objectFit:'cover',boxShadow:'0 2px 16px #000a'}} />
+          <div className="player-main-row mobile-two-rows" style={{width:'100%'}}>
+            <div className="player-top-row" style={{display:'flex',alignItems:'center',gap:'0.7rem',padding:'0.7rem 0.7rem 0 0.7rem'}}>
+              <img src={currentSong.cover_url} alt={currentSong.title} className="mobile-cover" style={{width:44,height:44,borderRadius:7,objectFit:'cover',boxShadow:'0 2px 12px #000a'}} />
               <div style={{display:'flex',flexDirection:'column',minWidth:0}}>
-                <span style={{fontWeight:700,fontSize:'1.18rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1}}>{currentSong.title}</span>
-                <span style={{fontWeight:500,fontSize:'1.05rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{currentSong.artist}</span>
+                <span className="mobile-title" style={{fontWeight:700,fontSize:'1.01rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1}}>{currentSong.title}</span>
+                <span className="mobile-artist" style={{fontWeight:500,fontSize:'0.91rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{currentSong.artist}</span>
               </div>
             </div>
-            {/* Right: Controls */}
-            <div className="player-controls" style={{display:'flex',alignItems:'center',gap:'1rem',flex:1,justifyContent:'flex-end'}}>
-              <button className="player-btn volume-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} tabIndex={-1}>
+            <div className="player-bottom-row" style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:'0.5rem',padding:'0.2rem 0.7rem 0 0.7rem'}}>
+              <button className="player-btn volume-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.18rem'}} tabIndex={-1}>
                 <Icon.Volume />
               </button>
-              <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} style={{width:80,marginRight:12,accentColor:'#a259ff'}} />
-              <button className="player-btn heart-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} onClick={handleLike} aria-label="Like">
+              <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} style={{width:48,marginRight:4,accentColor:'#a259ff'}} />
+              <button className="player-btn heart-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.18rem'}} onClick={handleLike} aria-label="Like">
                 <Icon.Heart filled={isLiked} />
               </button>
-              <button className="player-btn prev-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} onClick={handlePrev} disabled={currentIdx<=0} aria-label="Previous">
+              <button className="player-btn prev-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.18rem'}} onClick={handlePrev} disabled={currentIdx<=0} aria-label="Previous">
                 <Icon.Prev />
               </button>
-              <button className="player-btn play-pause-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem',margin:'0 0.2rem'}} onClick={isPlaying ? pause : resume} aria-label={isPlaying ? 'Pause' : 'Play'}>
+              <button className="player-btn play-pause-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.18rem',margin:'0 0.1rem'}} onClick={isPlaying ? pause : resume} aria-label={isPlaying ? 'Pause' : 'Play'}>
                 {isPlaying ? <Icon.Pause animate={animatePlay} /> : <Icon.Play animate={animatePlay} />}
               </button>
-              <button className="player-btn next-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.45rem'}} onClick={handleNext} disabled={currentIdx>=playlist.length-1} aria-label="Next">
+              <button className="player-btn next-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.18rem'}} onClick={handleNext} disabled={currentIdx>=playlist.length-1} aria-label="Next">
                 <Icon.Next />
               </button>
             </div>
           </div>
           {/* Progress bar */}
-          <div className="player-progress" style={{display:'flex',alignItems:'center',gap:'14px',padding:'0.4rem 1.6rem 1.1rem 1.6rem',width:'100%'}}>
-            <span className="time-current" style={{fontSize:'1.08rem',color:'#fff',minWidth:50,textAlign:'center'}}>{formatTime(currentTime)}</span>
+          <div className="player-progress" style={{display:'flex',alignItems:'center',gap:'7px',padding:'0.18rem 0.7rem 1.1rem 0.7rem',width:'100%'}}>
+            <span className="time-current" style={{fontSize:'0.91rem',color:'#fff',minWidth:32,textAlign:'center'}}>{formatTime(currentTime)}</span>
             <input
               type="range"
               className="progress-bar"
@@ -284,9 +282,9 @@ const MusicPlayer: React.FC = () => {
               max={duration}
               value={currentTime}
               onChange={handleSeek}
-              style={{flex:1,accentColor:'#a259ff',height:8,borderRadius:4,background:'#232323'}}
+              style={{flex:1,accentColor:'#a259ff',height:5,borderRadius:2.5,background:'#232323'}}
             />
-            <span className="time-total" style={{fontSize:'1.08rem',color:'#fff',minWidth:50,textAlign:'center'}}>{formatTime(duration)}</span>
+            <span className="time-total" style={{fontSize:'0.91rem',color:'#fff',minWidth:32,textAlign:'center'}}>{formatTime(duration)}</span>
           </div>
         </>
       )}
