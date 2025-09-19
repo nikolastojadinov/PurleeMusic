@@ -122,13 +122,94 @@ const MusicList: React.FC = () => {
         <h2 className="music-section-title">Made For You</h2>
         <ul className="music-vertical-list" style={{listStyle:'none',margin:0,padding:0}}>
           {madeForYou.map((song, idx) => (
-            <li key={idx} className="music-v-list-item" style={{display:'flex',alignItems:'center',gap:'1.1rem',padding:'0.7rem 0.5rem',borderBottom:'1px solid #232323'}}>
-              <img className="music-h-cover" src={song.cover_url} alt={song.title} style={{width:48,height:48,borderRadius:8,objectFit:'cover',boxShadow:'0 2px 12px #000a'}} />
-              <div style={{flex:1,minWidth:0}}>
-                <div className="music-h-title" style={{fontWeight:700,fontSize:'1.08rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{song.title}</div>
-                <div className="music-h-artist" style={{fontWeight:500,fontSize:'0.98rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{song.artist}</div>
+            <li
+              key={idx}
+              className="music-v-list-item made-for-you-item"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.7rem 0.5rem',
+                borderBottom: '1px solid #232323',
+                maxWidth: '100%',
+                boxSizing: 'border-box',
+                gap: 0
+              }}
+            >
+              <img
+                className="music-h-cover"
+                src={song.cover_url}
+                alt={song.title}
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 8,
+                  objectFit: 'cover',
+                  boxShadow: '0 2px 12px #000a',
+                  flexShrink: 0,
+                  marginRight: 12
+                }}
+              />
+              <div
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  overflow: 'hidden'
+                }}
+              >
+                <div
+                  className="music-h-title"
+                  style={{
+                    fontWeight: 700,
+                    fontSize: '1.08rem',
+                    color: '#f9e24c',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: 1.13
+                  }}
+                >
+                  {song.title}
+                </div>
+                <div
+                  className="music-h-artist"
+                  style={{
+                    fontWeight: 500,
+                    fontSize: '0.98rem',
+                    color: '#b3b3b3',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: 1.08
+                  }}
+                >
+                  {song.artist}
+                </div>
               </div>
-              {renderPlayButton(song)}
+              <div
+                className="made-for-you-icons"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  marginLeft: 12,
+                  flexShrink: 0,
+                  minWidth: 0
+                }}
+              >
+                {/* Like ikona (placeholder) */}
+                <button style={{background:'none',border:'none',padding:0,margin:0,cursor:'pointer',display:'flex',alignItems:'center'}} aria-label="Like">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                {/* Play dugme */}
+                {renderPlayButton(song)}
+                {/* Menu ikona (placeholder) */}
+                <button style={{background:'none',border:'none',padding:0,margin:0,cursor:'pointer',display:'flex',alignItems:'center'}} aria-label="Menu">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg>
+                </button>
+              </div>
             </li>
           ))}
         </ul>
