@@ -49,7 +49,7 @@ const madeForYou = [
 // ...existing code...
 
 const MusicList: React.FC = () => {
-  const { playSong, currentSong, isPlaying, resume, pause } = usePlayer();
+  const { playSong, currentSong, isPlaying, resume } = usePlayer();
 
   // Helper za play/pause logiku
   const handlePlayClick = (song: any) => {
