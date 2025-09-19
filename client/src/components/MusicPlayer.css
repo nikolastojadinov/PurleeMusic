@@ -1,3 +1,40 @@
+@media (max-width: 600px) {
+  .music-player.sticky-player {
+    min-height: 92px;
+    padding: 0 !important;
+  }
+  .player-main-row {
+    padding: 0.7rem 0.5rem 0.3rem 0.5rem !important;
+    gap: 0.6rem !important;
+  }
+  .player-left img {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 6px !important;
+  }
+  .player-left span {
+    font-size: 0.92rem !important;
+  }
+  .player-controls button {
+    padding: 0.18rem !important;
+  }
+  .player-controls {
+    gap: 0.38rem !important;
+  }
+  .player-progress {
+    gap: 6px !important;
+    padding: 0.1rem 0.5rem 0.4rem 0.5rem !important;
+  }
+  .player-progress .time-current,
+  .player-progress .time-total {
+    font-size: 0.82rem !important;
+    min-width: 32px !important;
+  }
+  .progress-bar {
+    height: 5px !important;
+    border-radius: 2.5px !important;
+  }
+}
 
 /* Sticky modern player */
 .music-player.sticky-player {
