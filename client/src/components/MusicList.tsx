@@ -4,11 +4,6 @@ import type { Song } from "./PlayerContext";
 import "./MusicList.css";
 
 
-import React from "react";
-import { usePlayer } from "./PlayerContext";
-import "./MusicList.css";
-
-
 const songs = [
   {
     title: "Retro Lounge",
