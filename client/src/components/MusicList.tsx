@@ -84,24 +84,10 @@ const MusicList: React.FC = () => {
                 <img
                   className="music-h-cover"
                   src={song.cover_url}
-                  alt={song.title}
+                  alt={song.title || "Album cover"}
                   style={{width:150,height:150,objectFit:'cover',borderRadius:8,display:'block'}}
                 />
-                {renderPlayButton(song)}
               </div>
-              <div className="music-h-info" style={{width:'100%',textAlign:'center',marginTop:2}}>
-                <div className="music-h-title" style={{fontWeight:600,fontSize:'1.01rem',color:'#fff',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:150}}>{song.title}</div>
-                <div className="music-h-artist" style={{fontWeight:400,fontSize:'0.93rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:150}}>{song.artist}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="music-section">
-        <h2 className="music-section-title">Made For You</h2>
-        <ul className="music-vertical-list" style={{listStyle:'none',margin:0,padding:0}}>
-          {madeForYou.map((song, idx) => (
-            <li
               key={idx}
               className="music-v-list-item made-for-you-item"
               style={{
@@ -112,20 +98,20 @@ const MusicList: React.FC = () => {
                 maxWidth: '100%',
                 boxSizing: 'border-box',
                 gap: 0
-              }}
-            >
-              <img
-                className="music-h-cover"
-                src={song.cover_url}
-
-                style={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 8,
-                  objectFit: 'cover',
-                  boxShadow: '0 2px 12px #000a',
-                  flexShrink: 0,
-                  marginRight: 12
+                  <img
+                    className="music-h-cover"
+                    src={song.cover_url}
+                    alt={song.title || "Album cover"}
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 8,
+                      objectFit: 'cover',
+                      boxShadow: '0 2px 12px #000a',
+                      flexShrink: 0,
+                      marginRight: 12
+                    }}
+                  />
                 }}
               />
               <div
