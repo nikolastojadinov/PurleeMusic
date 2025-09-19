@@ -46,8 +46,37 @@ const madeForYou = [
   songs[3], songs[0]
 ];
 
+// ...existing code...
+
 const MusicList: React.FC = () => {
-  const { playSong } = usePlayer();
+  const { playSong, currentSong, isPlaying, resume, pause } = usePlayer();
+
+  // Helper za play/pause logiku
+  const handlePlayClick = (song: any) => {
+    if (!currentSong || currentSong.audio_url !== song.audio_url) {
+      playSong(song); // uvek pokreni iz početka
+    } else if (!isPlaying) {
+      resume(); // nastavi ako je pauzirano
+    } // ako je već aktivna i svira, ne radi ništa
+  };
+
+  const renderPlayButton = (song: any) => {
+    const isActive = currentSong && currentSong.audio_url === song.audio_url;
+    return (
+      <button className={"music-h-play" + (isActive ? (isPlaying ? " playing" : " paused") : "")} onClick={() => handlePlayClick(song)}>
+        {isActive ? (
+          isPlaying ? (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><rect x="9" y="8" width="2.8" height="8" rx="1.2" fill="#a259ff"/><rect x="14.2" y="8" width="2.8" height="8" rx="1.2" fill="#a259ff"/></svg>
+          ) : (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
+          )
+        ) : (
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
+        )}
+      </button>
+    );
+  };
+
   return (
     <div className="home-hero-wrap">
       <section className="music-section">
@@ -57,9 +86,7 @@ const MusicList: React.FC = () => {
             <div className="music-h-card" key={idx}>
               <div className="music-h-cover-wrap">
                 <img className="music-h-cover" src={song.cover_url} alt={song.title} />
-                <button className="music-h-play" onClick={() => playSong(song)}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
-                </button>
+                {renderPlayButton(song)}
               </div>
               <div className="music-h-info">
                 <div className="music-h-title">{song.title}</div>
@@ -76,9 +103,7 @@ const MusicList: React.FC = () => {
             <div className="music-h-card" key={idx}>
               <div className="music-h-cover-wrap">
                 <img className="music-h-cover" src={song.cover_url} alt={song.title} />
-                <button className="music-h-play" onClick={() => playSong(song)}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
-                </button>
+                {renderPlayButton(song)}
               </div>
               <div className="music-h-info">
                 <div className="music-h-title">{song.title}</div>
