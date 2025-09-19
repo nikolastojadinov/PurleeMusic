@@ -81,23 +81,6 @@ const MusicList: React.FC = () => {
   const { currentSong, isPlaying } = usePlayer();
 
 
-  // Renderuje samo ikonu, bez play dugmeta, za Recently Played
-  const renderIcon = (song: any) => {
-    const isActive = currentSong && currentSong.audio_url === song.audio_url;
-    return (
-      <span className={"music-h-play" + (isActive ? (isPlaying ? " playing" : " paused") : "") }>
-        {isActive ? (
-          isPlaying ? (
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><rect x="9" y="8" width="2.8" height="8" rx="1.2" fill="#a259ff"/><rect x="14.2" y="8" width="2.8" height="8" rx="1.2" fill="#a259ff"/></svg>
-          ) : (
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
-          )
-        ) : (
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
-        )}
-      </span>
-    );
-  };
 
   return (
     <div className="home-hero-wrap">
