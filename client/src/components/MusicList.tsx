@@ -37,20 +37,51 @@ const songs = [
   },
 ];
 
+
+const recentlyPlayed = [
+  songs[2], songs[1], songs[0]
+];
+const madeForYou = [
+  songs[3], songs[0]
+];
+
 const MusicList: React.FC = () => {
   return (
     <div className="home-hero-wrap">
-      <section className="featured-section">
-        <h2 className="featured-title">Featured playlists</h2>
-        <div className="featured-grid">
-          {songs.map((song, idx) => (
-            <div className="music-card" key={idx}>
-              <img className="music-cover" src={song.cover_url} alt={song.title} />
-              <div className="music-info">
-                <div className="music-title">{song.title}</div>
-                <div className="music-artist">{song.artist}</div>
+      <section className="music-section">
+        <h2 className="music-section-title">Recently Played</h2>
+        <div className="music-horizontal-list">
+          {recentlyPlayed.map((song, idx) => (
+            <div className="music-h-card" key={idx}>
+              <div className="music-h-cover-wrap">
+                <img className="music-h-cover" src={song.cover_url} alt={song.title} />
+                <button className="music-h-play">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
+                </button>
               </div>
-              <audio className="music-audio" controls src={song.audio_url} preload="none" />
+              <div className="music-h-info">
+                <div className="music-h-title">{song.title}</div>
+                <div className="music-h-artist">{song.artist}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="music-section">
+        <h2 className="music-section-title">Made For You</h2>
+        <div className="music-horizontal-list">
+          {madeForYou.map((song, idx) => (
+            <div className="music-h-card" key={idx}>
+              <div className="music-h-cover-wrap">
+                <img className="music-h-cover" src={song.cover_url} alt={song.title} />
+                <button className="music-h-play">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
+                </button>
+              </div>
+              <div className="music-h-info">
+                <div className="music-h-title">{song.title}</div>
+                <div className="music-h-artist">{song.artist}</div>
+              </div>
             </div>
           ))}
         </div>
