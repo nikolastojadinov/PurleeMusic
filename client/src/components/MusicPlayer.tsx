@@ -65,6 +65,15 @@ const playlist = [
 ];
 
 const MusicPlayer: React.FC = () => {
+  const [visible, setVisible] = useState(true);
+  const { currentSong, isPlaying, pause, resume, playSong, audioRef, setCurrentSong } = usePlayer();
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [animatePlay, setAnimatePlay] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+
   // Kada se player zatvori, resetuj currentSong da bi playSong uvek radio
   useEffect(() => {
     if (!visible && currentSong) {
@@ -72,15 +81,6 @@ const MusicPlayer: React.FC = () => {
       if (typeof window !== 'undefined' && window.__setCurrentSong) window.__setCurrentSong(null);
     }
   }, [visible]);
-
-  const { currentSong, isPlaying, pause, resume, playSong, audioRef, setCurrentSong } = usePlayer();
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [animatePlay, setAnimatePlay] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [fullscreen, setFullscreen] = useState(false);
 
   // Kada se player zatvori, resetuj currentSong da bi playSong uvek radio
   useEffect(() => {
