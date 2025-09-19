@@ -14,7 +14,7 @@ export type PlayerContextType = {
   pause: () => void;
   resume: () => void;
   setIsPlaying: (v: boolean) => void;
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
 };
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);

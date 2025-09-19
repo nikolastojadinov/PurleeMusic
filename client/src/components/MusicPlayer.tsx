@@ -1,55 +1,36 @@
-import React, { useRef, useEffect } from 'react';
-// import { MusicFile } from '../App';
+import React, { useEffect, useState } from 'react';
 import './MusicPlayer.css';
+import { usePlayer } from './PlayerContext';
 
-
-interface MusicPlayerProps {
-  track: {
-    title: string;
-    artist: string;
-    audio_url: string;
-    cover_url: string;
-    [key: string]: any;
-  };
-  isPlaying: boolean;
-  onTogglePlay: () => void;
-  onTimeUpdate: (currentTime: number, duration: number) => void;
-}
-
-const MusicPlayer: React.FC<MusicPlayerProps> = ({
-  track,
-  isPlaying,
-  onTogglePlay,
-  onTimeUpdate,
-}) => {
-  const audioRef = useRef<HTMLAudioElement>(null);
+const MusicPlayer: React.FC = () => {
+  const { currentSong, isPlaying, pause, resume, audioRef } = usePlayer();
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
     if (isPlaying) {
-      audio.play().catch(console.error);
+      audio.play().catch(() => {});
     } else {
       audio.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, audioRef]);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    // Reset audio when track changes
-    audio.currentTime = 0;
-    if (isPlaying) {
-      audio.play().catch(console.error);
+    setCurrentTime(0);
+    if (currentSong && isPlaying) {
+      audio.play().catch(() => {});
     }
-  }, [track.id, isPlaying]);
+  }, [currentSong, isPlaying, audioRef]);
 
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
     if (audio) {
-      onTimeUpdate(audio.currentTime, audio.duration || 0);
+      setCurrentTime(audio.currentTime);
+      setDuration(audio.duration || 0);
     }
   };
 
@@ -58,7 +39,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
     if (audio) {
       const newTime = parseFloat(e.target.value);
       audio.currentTime = newTime;
-      onTimeUpdate(newTime, audio.duration || 0);
+      setCurrentTime(newTime);
     }
   };
 
@@ -69,25 +50,23 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const getStreamUrl = (filename: string) => {
-    return `/api/stream/${encodeURIComponent(filename)}`;
-  };
+  if (!currentSong) return null;
 
   return (
     <div className="music-player">
       <audio
         ref={audioRef}
-        src={getStreamUrl(track.name)}
+        src={currentSong.audio_url}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleTimeUpdate}
-        onEnded={() => onTogglePlay()}
+        onEnded={pause}
         preload="metadata"
       />
-      
+
       <div className="player-controls">
         <button
           className={`play-pause-btn ${isPlaying ? 'playing' : 'paused'}`}
-          onClick={onTogglePlay}
+          onClick={isPlaying ? pause : resume}
         >
           {isPlaying ? '⏸️' : '▶️'}
         </button>
@@ -95,18 +74,18 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
       <div className="player-progress">
         <span className="time-current">
-          {formatTime(audioRef.current?.currentTime || 0)}
+          {formatTime(currentTime)}
         </span>
         <input
           type="range"
           className="progress-bar"
           min="0"
-          max={audioRef.current?.duration || 0}
-          value={audioRef.current?.currentTime || 0}
+          max={duration}
+          value={currentTime}
           onChange={handleSeek}
         />
         <span className="time-total">
-          {formatTime(audioRef.current?.duration || 0)}
+          {formatTime(duration)}
         </span>
       </div>
     </div>
