@@ -77,6 +77,8 @@ function App() {
           <Route path="/playlists" element={<div style={{textAlign:'center',marginTop:'3rem',fontSize:'1.3rem',color:'#fff'}}>My Playlists</div>} />
         </Routes>
       </main>
+      {/* MUSIC PLAYER */}
+      <MusicPlayer />
       {/* FOOTER NAV */}
       <footer className="pm-footer-nav" style={{
         width: '100%',
@@ -110,7 +112,6 @@ function App() {
           <span style={{fontSize:'0.82rem',marginTop:1,fontWeight:500,color: location.pathname==='/liked' ? '#a259ff' : '#b3b3b3'}}>Liked Songs</span>
         </Link>
       </footer>
-      <MusicPlayer />
     </div>
     </PlayerProvider>
   );
