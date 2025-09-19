@@ -1,5 +1,5 @@
 import React from "react";
-import { usePlayer } from "./PlayerContext";
+// import { usePlayer } from "./PlayerContext";
 import { openPlayerWithTrack } from "./MusicPlayer";
 import type { Song } from "./PlayerContext";
 import "./MusicList.css";
