@@ -89,6 +89,7 @@ const MusicPlayer: React.FC = () => {
     const audio = audioRef.current;
     if (!audio) return;
     if (isPlaying) {
+      setVisible(true); // automatski otvori player kad krene pesma
       audio.play().catch(() => {});
     } else {
       audio.pause();
@@ -101,6 +102,7 @@ const MusicPlayer: React.FC = () => {
     setCurrentTime(0);
     setIsLiked(false);
     if (currentSong && isPlaying) {
+      setVisible(true); // automatski otvori player kad se promeni pesma
       audio.play().catch(() => {});
     }
   }, [currentSong, isPlaying, audioRef]);
