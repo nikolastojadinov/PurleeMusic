@@ -65,7 +65,15 @@ const playlist = [
 ];
 
 const MusicPlayer: React.FC = () => {
-  const { currentSong, isPlaying, pause, resume, playSong, audioRef } = usePlayer();
+  // Kada se player zatvori, resetuj currentSong da bi playSong uvek radio
+  useEffect(() => {
+    if (!visible && currentSong) {
+      // @ts-ignore
+      if (typeof window !== 'undefined' && window.__setCurrentSong) window.__setCurrentSong(null);
+    }
+  }, [visible]);
+
+  const { currentSong, isPlaying, pause, resume, playSong, audioRef, setCurrentSong } = usePlayer();
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -73,6 +81,13 @@ const MusicPlayer: React.FC = () => {
   const [animatePlay, setAnimatePlay] = useState(false);
   const [visible, setVisible] = useState(true);
   const [fullscreen, setFullscreen] = useState(false);
+
+  // Kada se player zatvori, resetuj currentSong da bi playSong uvek radio
+  useEffect(() => {
+    if (!visible && currentSong) {
+      setCurrentSong(null);
+    }
+  }, [visible, currentSong, setCurrentSong]);
 
   // Find current index in playlist
   const currentIdx = playlist.findIndex(

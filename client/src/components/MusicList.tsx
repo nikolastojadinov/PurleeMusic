@@ -1,5 +1,11 @@
 import React from "react";
 import { usePlayer } from "./PlayerContext";
+import type { Song } from "./PlayerContext";
+import "./MusicList.css";
+
+
+import React from "react";
+import { usePlayer } from "./PlayerContext";
 import "./MusicList.css";
 
 
@@ -49,6 +55,33 @@ const madeForYou = [
 // ...existing code...
 
 const MusicList: React.FC = () => {
+  function renderPlayButton(song: Song) {
+    return (
+      <button
+        className="music-play-btn"
+        onClick={() => playSong(song)}
+        style={{
+          background: 'linear-gradient(90deg,#a259ff 60%,#f9e24c 100%)',
+          border: 'none',
+          borderRadius: '50%',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px #0005',
+          cursor: 'pointer',
+          marginLeft: 8
+        }}
+        aria-label="Play"
+      >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="9" fill="#fff" fillOpacity="0.18"/>
+          <path d="M7.5 6.5V11.5L12 9L7.5 6.5Z" fill="#fff"/>
+        </svg>
+      </button>
+    );
+  }
   const { playSong, currentSong, isPlaying, resume } = usePlayer();
 
   // Helper za play/pause logiku
@@ -60,10 +93,11 @@ const MusicList: React.FC = () => {
     } // ako je već aktivna i svira, ne radi ništa
   };
 
-  const renderPlayButton = (song: any) => {
+  // Renderuje samo ikonu, bez play dugmeta, za Recently Played
+  const renderIcon = (song: any) => {
     const isActive = currentSong && currentSong.audio_url === song.audio_url;
     return (
-      <button className={"music-h-play" + (isActive ? (isPlaying ? " playing" : " paused") : "")} onClick={() => handlePlayClick(song)}>
+      <span className={"music-h-play" + (isActive ? (isPlaying ? " playing" : " paused") : "") }>
         {isActive ? (
           isPlaying ? (
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><rect x="9" y="8" width="2.8" height="8" rx="1.2" fill="#a259ff"/><rect x="14.2" y="8" width="2.8" height="8" rx="1.2" fill="#a259ff"/></svg>
@@ -73,7 +107,7 @@ const MusicList: React.FC = () => {
         ) : (
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
         )}
-      </button>
+      </span>
     );
   };
 
@@ -84,9 +118,9 @@ const MusicList: React.FC = () => {
         <div className="music-horizontal-list">
           {recentlyPlayed.map((song, idx) => (
             <div className="music-h-card" key={idx}>
-              <div className="music-h-cover-wrap">
+              <div className="music-h-cover-wrap" style={{position:'relative',cursor:'pointer'}} onClick={() => playSong(song)}>
                 <img className="music-h-cover" src={song.cover_url} alt={song.title} />
-                {renderPlayButton(song)}
+                {renderIcon(song)}
               </div>
               <div className="music-h-info">
                 <div className="music-h-title">{song.title}</div>
@@ -98,20 +132,18 @@ const MusicList: React.FC = () => {
       </section>
       <section className="music-section">
         <h2 className="music-section-title">Made For You</h2>
-        <div className="music-horizontal-list">
+        <ul className="music-vertical-list" style={{listStyle:'none',margin:0,padding:0}}>
           {madeForYou.map((song, idx) => (
-            <div className="music-h-card" key={idx}>
-              <div className="music-h-cover-wrap">
-                <img className="music-h-cover" src={song.cover_url} alt={song.title} />
-                {renderPlayButton(song)}
+            <li key={idx} className="music-v-list-item" style={{display:'flex',alignItems:'center',gap:'1.1rem',padding:'0.7rem 0.5rem',borderBottom:'1px solid #232323'}}>
+              <img className="music-h-cover" src={song.cover_url} alt={song.title} style={{width:48,height:48,borderRadius:8,objectFit:'cover',boxShadow:'0 2px 12px #000a'}} />
+              <div style={{flex:1,minWidth:0}}>
+                <div className="music-h-title" style={{fontWeight:700,fontSize:'1.08rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{song.title}</div>
+                <div className="music-h-artist" style={{fontWeight:500,fontSize:'0.98rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{song.artist}</div>
               </div>
-              <div className="music-h-info">
-                <div className="music-h-title">{song.title}</div>
-                <div className="music-h-artist">{song.artist}</div>
-              </div>
-            </div>
+              {renderPlayButton(song)}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </div>
   );

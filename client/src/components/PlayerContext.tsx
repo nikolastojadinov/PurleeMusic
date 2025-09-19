@@ -14,6 +14,7 @@ export type PlayerContextType = {
   pause: () => void;
   resume: () => void;
   setIsPlaying: (v: boolean) => void;
+  setCurrentSong: (song: Song | null) => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
 };
 
@@ -32,7 +33,7 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const resume = () => setIsPlaying(true);
 
   return (
-    <PlayerContext.Provider value={{ currentSong, isPlaying, playSong, pause, resume, setIsPlaying, audioRef }}>
+    <PlayerContext.Provider value={{ currentSong, isPlaying, playSong, pause, resume, setIsPlaying, setCurrentSong, audioRef }}>
       {children}
     </PlayerContext.Provider>
   );
