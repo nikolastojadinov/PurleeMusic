@@ -65,8 +65,9 @@ const playlist = [
 ];
 
 const MusicPlayer: React.FC = () => {
-  const [visible, setVisible] = useState(true);
-  const { currentSong, isPlaying, pause, resume, playSong, audioRef, setCurrentSong } = usePlayer();
+  const [showPlayer, setShowPlayer] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<any>(null);
+  const { isPlaying, pause, resume, playSong, audioRef } = usePlayer();
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -74,37 +75,29 @@ const MusicPlayer: React.FC = () => {
   const [animatePlay, setAnimatePlay] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
 
-  // Kada se player zatvori, resetuj currentSong da bi playSong uvek radio
+  // Kada se player zatvori, resetuj currentTrack
   useEffect(() => {
-    if (!visible && currentSong) {
-      // @ts-ignore
-      if (typeof window !== 'undefined' && window.__setCurrentSong) window.__setCurrentSong(null);
+    if (!showPlayer && currentTrack) {
+      setCurrentTrack(null);
     }
-  }, [visible, currentSong]);
-
-  // Kada se player zatvori, resetuj currentSong da bi playSong uvek radio
-  useEffect(() => {
-    if (!visible && currentSong) {
-      setCurrentSong(null);
-    }
-  }, [visible, currentSong, setCurrentSong]);
+  }, [showPlayer, currentTrack]);
 
   // Find current index in playlist
   const currentIdx = playlist.findIndex(
-    (s) => s.audio_url === currentSong?.audio_url
+    (s) => s.audio_url === currentTrack?.audio_url
   );
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
     audio.volume = volume;
-  }, [volume, audioRef, currentSong]);
+  }, [volume, audioRef, currentTrack]);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
     if (isPlaying) {
-      setVisible(true); // automatski otvori player kad krene pesma
+      setShowPlayer(true); // automatski otvori player kad krene pesma
       audio.play().catch(() => {});
     } else {
       audio.pause();
@@ -116,11 +109,11 @@ const MusicPlayer: React.FC = () => {
     if (!audio) return;
     setCurrentTime(0);
     setIsLiked(false);
-    if (currentSong && isPlaying) {
-      setVisible(true); // automatski otvori player kad se promeni pesma
+    if (currentTrack && isPlaying) {
+      setShowPlayer(true); // automatski otvori player kad se promeni pesma
       audio.play().catch(() => {});
     }
-  }, [currentSong, isPlaying, audioRef]);
+  }, [currentTrack, isPlaying, audioRef]);
 
   // Play animáció
   useEffect(() => {
@@ -168,7 +161,7 @@ const MusicPlayer: React.FC = () => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  if (!currentSong || !visible) return null;
+  if (!currentTrack || !showPlayer) return null;
 
   // Fullscreen style
   const fullscreenStyle = fullscreen
@@ -204,7 +197,7 @@ const MusicPlayer: React.FC = () => {
     <div className="music-player sticky-player" style={fullscreenStyle}>
       <audio
         ref={audioRef}
-        src={currentSong.audio_url}
+  src={currentTrack?.audio_url}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleTimeUpdate}
         onEnded={handleNext}
@@ -217,15 +210,15 @@ const MusicPlayer: React.FC = () => {
         ) : (
           <button onClick={()=>setFullscreen(true)} style={{background:'none',border:'none',color:'#fff',fontSize:22,cursor:'pointer',opacity:0.85,padding:4,lineHeight:1}} title="Fullscreen" aria-label="Fullscreen">⛶</button>
         )}
-        <button onClick={()=>setVisible(false)} style={{background:'none',border:'none',color:'#fff',fontSize:fullscreen?32:22,cursor:'pointer',opacity:0.85,padding:fullscreen?8:4,lineHeight:1}} title="Close" aria-label="Close">✕</button>
+  <button onClick={()=>{setShowPlayer(false); setCurrentTrack(null);}} style={{background:'none',border:'none',color:'#fff',fontSize:fullscreen?32:22,cursor:'pointer',opacity:0.85,padding:fullscreen?8:4,lineHeight:1}} title="Close" aria-label="Close">✕</button>
       </div>
       {fullscreen ? (
         <>
           <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start',width:'100%',height:'100%',paddingTop:'8vh'}}>
-            <img src={currentSong.cover_url} alt={currentSong.title} style={{width:220,height:220,borderRadius:22,objectFit:'cover',boxShadow:'0 4px 32px #000a',marginBottom:'2.5rem'}} />
+            <img src={currentTrack?.cover_url} alt={currentTrack?.title} style={{width:220,height:220,borderRadius:22,objectFit:'cover',boxShadow:'0 4px 32px #000a',marginBottom:'2.5rem'}} />
             <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginBottom:'2.2rem'}}>
-              <span style={{fontWeight:700,fontSize:'2.5rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1,textAlign:'center'}}>{currentSong.title}</span>
-              <span style={{fontWeight:500,fontSize:'1.7rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',textAlign:'center'}}>{currentSong.artist}</span>
+              <span style={{fontWeight:700,fontSize:'2.5rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1,textAlign:'center'}}>{currentTrack?.title}</span>
+              <span style={{fontWeight:500,fontSize:'1.7rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',textAlign:'center'}}>{currentTrack?.artist}</span>
             </div>
             <div className="player-controls-fullscreen" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'1.2rem',marginBottom:'2.2rem',width:'100%'}}>
               <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'2.2rem',width:'100%'}}>
@@ -268,10 +261,10 @@ const MusicPlayer: React.FC = () => {
         <>
           <div className="player-main-row mobile-two-rows" style={{width:'100%'}}>
             <div className="player-top-row" style={{display:'flex',alignItems:'center',gap:'0.7rem',padding:'0.7rem 0.7rem 0 0.7rem'}}>
-              <img src={currentSong.cover_url} alt={currentSong.title} className="mobile-cover" style={{width:44,height:44,borderRadius:7,objectFit:'cover',boxShadow:'0 2px 12px #000a'}} />
+              <img src={currentTrack?.cover_url} alt={currentTrack?.title} className="mobile-cover" style={{width:44,height:44,borderRadius:7,objectFit:'cover',boxShadow:'0 2px 12px #000a'}} />
               <div style={{display:'flex',flexDirection:'column',minWidth:0}}>
-                <span className="mobile-title" style={{fontWeight:700,fontSize:'1.01rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1}}>{currentSong.title}</span>
-                <span className="mobile-artist" style={{fontWeight:500,fontSize:'0.91rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{currentSong.artist}</span>
+                <span className="mobile-title" style={{fontWeight:700,fontSize:'1.01rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1}}>{currentTrack?.title}</span>
+                <span className="mobile-artist" style={{fontWeight:500,fontSize:'0.91rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{currentTrack?.artist}</span>
               </div>
             </div>
             <div className="player-bottom-row" style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:'0.5rem',padding:'0.2rem 0.7rem 0 0.7rem'}}>
