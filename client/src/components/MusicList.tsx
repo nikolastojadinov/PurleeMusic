@@ -79,14 +79,6 @@ const MusicList: React.FC = () => {
   }
   const { playSong, currentSong, isPlaying, resume } = usePlayer();
 
-  // Helper za play/pause logiku
-  const handlePlayClick = (song: any) => {
-    if (!currentSong || currentSong.audio_url !== song.audio_url) {
-      playSong(song); // uvek pokreni iz početka
-    } else if (!isPlaying) {
-      resume(); // nastavi ako je pauzirano
-    } // ako je već aktivna i svira, ne radi ništa
-  };
 
   // Renderuje samo ikonu, bez play dugmeta, za Recently Played
   const renderIcon = (song: any) => {

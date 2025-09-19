@@ -98,7 +98,7 @@ const MusicPlayer: React.FC = () => {
     const audio = audioRef.current;
     if (!audio) return;
     audio.volume = volume;
-  }, [volume, audioRef]);
+  }, [volume, audioRef, currentSong]);
 
   useEffect(() => {
     const audio = audioRef.current;
