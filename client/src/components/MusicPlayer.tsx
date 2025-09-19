@@ -64,9 +64,15 @@ const playlist = [
   },
 ];
 
+export let openPlayerWithTrack: ((song: any) => void) | null = null;
 const MusicPlayer: React.FC = () => {
   const [showPlayer, setShowPlayer] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<any>(null);
+  // expose global function for MusicList
+  openPlayerWithTrack = (song: any) => {
+    setCurrentTrack(song);
+    setShowPlayer(true);
+  };
   const { isPlaying, pause, resume, playSong, audioRef } = usePlayer();
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);

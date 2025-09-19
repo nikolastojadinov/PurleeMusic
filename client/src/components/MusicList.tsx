@@ -1,5 +1,6 @@
 import React from "react";
 import { usePlayer } from "./PlayerContext";
+import { openPlayerWithTrack } from "./MusicPlayer";
 import type { Song } from "./PlayerContext";
 import "./MusicList.css";
 
@@ -54,7 +55,7 @@ const MusicList: React.FC = () => {
     return (
       <button
         className="music-play-btn"
-        onClick={() => playSong(song)}
+        onClick={() => openPlayerWithTrack && openPlayerWithTrack(song)}
         style={{
           background: 'linear-gradient(90deg,#a259ff 60%,#f9e24c 100%)',
           border: 'none',
@@ -105,7 +106,7 @@ const MusicList: React.FC = () => {
         <div className="music-horizontal-list">
           {recentlyPlayed.map((song, idx) => (
             <div className="music-h-card" key={idx}>
-              <div className="music-h-cover-wrap" style={{position:'relative',cursor:'pointer'}} onClick={() => playSong(song)}>
+              <div className="music-h-cover-wrap" style={{position:'relative',cursor:'pointer'}} onClick={() => openPlayerWithTrack && openPlayerWithTrack(song)}>
                 <img className="music-h-cover" src={song.cover_url} alt={song.title} />
                 {renderIcon(song)}
               </div>
