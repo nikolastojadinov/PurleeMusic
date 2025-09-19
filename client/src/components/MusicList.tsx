@@ -55,25 +55,12 @@ const MusicList: React.FC = () => {
     return (
       <button
         className="music-play-btn"
-        onClick={() => openPlayerWithTrack && openPlayerWithTrack(song)}
-        style={{
-          background: 'linear-gradient(90deg,#a259ff 60%,#f9e24c 100%)',
-          border: 'none',
-          borderRadius: '50%',
-          width: 36,
-          height: 36,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 2px 8px #0005',
-          cursor: 'pointer',
-          marginLeft: 8
-        }}
+        onClick={e => { e.stopPropagation(); openPlayerWithTrack && openPlayerWithTrack(song); }}
         aria-label="Play"
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="9" cy="9" r="9" fill="#fff" fillOpacity="0.18"/>
-          <path d="M7.5 6.5V11.5L12 9L7.5 6.5Z" fill="#fff"/>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="14" fill="#fff"/>
+          <polygon points="12,9 20,14 12,19" fill="#222"/>
         </svg>
       </button>
     );
@@ -91,7 +78,7 @@ const MusicList: React.FC = () => {
             <div className="music-h-card" key={idx} style={{display:'flex',flexDirection:'column',alignItems:'center',minWidth:150}}>
               <div
                 className="music-h-cover-wrap"
-                style={{width:150,height:150,marginBottom:10,cursor:'pointer',borderRadius:8,overflow:'hidden',boxShadow:'0 2px 16px #0007'}}
+                style={{width:150,height:150,marginBottom:10,cursor:'pointer',borderRadius:8,overflow:'hidden',boxShadow:'0 2px 16px #0007',position:'relative'}}
                 onClick={() => openPlayerWithTrack && openPlayerWithTrack(song)}
               >
                 <img
@@ -100,6 +87,7 @@ const MusicList: React.FC = () => {
                   alt={song.title}
                   style={{width:150,height:150,objectFit:'cover',borderRadius:8,display:'block'}}
                 />
+                {renderPlayButton(song)}
               </div>
               <div className="music-h-info" style={{width:'100%',textAlign:'center',marginTop:2}}>
                 <div className="music-h-title" style={{fontWeight:600,fontSize:'1.01rem',color:'#fff',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:150}}>{song.title}</div>
