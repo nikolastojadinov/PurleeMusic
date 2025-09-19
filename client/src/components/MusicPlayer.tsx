@@ -204,8 +204,8 @@ const MusicPlayer: React.FC = () => {
       </div>
       {fullscreen ? (
         <>
-          <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start',width:'100%',height:'100%',paddingTop:'6vh'}}>
-            <img src={currentSong.cover_url} alt={currentSong.title} style={{width:320,height:320,borderRadius:28,objectFit:'cover',boxShadow:'0 4px 32px #000a',marginBottom:'2.5rem'}} />
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start',width:'100%',height:'100%',paddingTop:'8vh'}}>
+            <img src={currentSong.cover_url} alt={currentSong.title} style={{width:220,height:220,borderRadius:22,objectFit:'cover',boxShadow:'0 4px 32px #000a',marginBottom:'2.5rem'}} />
             <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginBottom:'2.2rem'}}>
               <span style={{fontWeight:700,fontSize:'2.5rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1,textAlign:'center'}}>{currentSong.title}</span>
               <span style={{fontWeight:500,fontSize:'1.7rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',textAlign:'center'}}>{currentSong.artist}</span>
