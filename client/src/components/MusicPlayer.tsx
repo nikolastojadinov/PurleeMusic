@@ -210,23 +210,27 @@ const MusicPlayer: React.FC = () => {
               <span style={{fontWeight:700,fontSize:'2.5rem',color:'#f9e24c',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',lineHeight:1.1,textAlign:'center'}}>{currentSong.title}</span>
               <span style={{fontWeight:500,fontSize:'1.7rem',color:'#b3b3b3',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',textAlign:'center'}}>{currentSong.artist}</span>
             </div>
-            <div className="player-controls" style={{display:'flex',alignItems:'center',gap:'2.2rem',justifyContent:'center',marginBottom:'2.2rem'}}>
-              <button className="player-btn volume-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} tabIndex={-1}>
-                <Icon.Volume />
-              </button>
-              <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} style={{width:200,marginRight:24,accentColor:'#a259ff'}} />
-              <button className="player-btn heart-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handleLike} aria-label="Like">
-                <Icon.Heart filled={isLiked} />
-              </button>
-              <button className="player-btn prev-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handlePrev} disabled={currentIdx<=0} aria-label="Previous">
-                <Icon.Prev />
-              </button>
-              <button className="player-btn play-pause-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem',margin:'0 0.2rem'}} onClick={isPlaying ? pause : resume} aria-label={isPlaying ? 'Pause' : 'Play'}>
-                {isPlaying ? <Icon.Pause animate={animatePlay} /> : <Icon.Play animate={animatePlay} />}
-              </button>
-              <button className="player-btn next-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handleNext} disabled={currentIdx>=playlist.length-1} aria-label="Next">
-                <Icon.Next />
-              </button>
+            <div className="player-controls-fullscreen" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'1.2rem',marginBottom:'2.2rem',width:'100%'}}>
+              <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'2.2rem',width:'100%'}}>
+                <button className="player-btn volume-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} tabIndex={-1}>
+                  <Icon.Volume />
+                </button>
+                <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} style={{width:200,marginRight:24,accentColor:'#a259ff'}} />
+                <button className="player-btn heart-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handleLike} aria-label="Like">
+                  <Icon.Heart filled={isLiked} />
+                </button>
+              </div>
+              <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'2.2rem',width:'100%'}}>
+                <button className="player-btn prev-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handlePrev} disabled={currentIdx<=0} aria-label="Previous">
+                  <Icon.Prev />
+                </button>
+                <button className="player-btn play-pause-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem',margin:'0 0.2rem'}} onClick={isPlaying ? pause : resume} aria-label={isPlaying ? 'Pause' : 'Play'}>
+                  {isPlaying ? <Icon.Pause animate={animatePlay} /> : <Icon.Play animate={animatePlay} />}
+                </button>
+                <button className="player-btn next-btn" style={{background:'none',border:'none',cursor:'pointer',padding:'.9rem'}} onClick={handleNext} disabled={currentIdx>=playlist.length-1} aria-label="Next">
+                  <Icon.Next />
+                </button>
+              </div>
             </div>
             <div className="player-progress" style={{display:'flex',alignItems:'center',gap:'28px',width:'100%',maxWidth:600,margin:'0 auto'}}>
               <span className="time-current" style={{fontSize:'1.5rem',color:'#fff',minWidth:70,textAlign:'center'}}>{formatTime(currentTime)}</span>
