@@ -3,6 +3,8 @@ import React from 'react';
 import './App.css';
 
 import MusicList from './components/MusicList';
+import MusicPlayer from './components/MusicPlayer';
+import { PlayerProvider } from './components/PlayerContext';
 import './components/BottomNav.css';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
@@ -13,7 +15,8 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 function App() {
   const location = useLocation();
   return (
-    <div className="App spotify-theme mobile-layout" style={{minHeight:'100vh',display:'flex',flexDirection:'column'}}>
+    <PlayerProvider>
+      <div className="App spotify-theme mobile-layout" style={{minHeight:'100vh',display:'flex',flexDirection:'column'}}>
       {/* HEADER */}
       <header className="pm-header" style={{
         width: '100%',
@@ -36,8 +39,9 @@ function App() {
             borderRadius:'50%',
             background:'linear-gradient(135deg,#a259ff 0%,#f9e24c 100%)',
             boxShadow:'0 2px 8px #0002',
+            overflow:'hidden',
           }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#f9e24c" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 0-7 7v2.5a2.5 2.5 0 0 0 2 2.45V9a5 5 0 0 1 10 0v4.95a2.5 2.5 0 0 0 2-2.45V9a7 7 0 0 0-7-7Zm0 20a4.5 4.5 0 0 1-4.5-4.5V13a1 1 0 1 1 2 0v4.5a2.5 2.5 0 0 0 5 0V13a1 1 0 1 1 2 0v4.5A4.5 4.5 0 0 1 12 22Z"/></svg>
+            <img src={process.env.PUBLIC_URL + '/purplebeats-logo.png'} alt="PurpleBeats Logo" style={{width:38,height:38,objectFit:'contain',display:'block'}} />
           </span>
           <span style={{
             fontWeight:800,
@@ -102,7 +106,9 @@ function App() {
           <span style={{fontSize:'0.82rem',marginTop:1,fontWeight:500,color: location.pathname==='/liked' ? '#a259ff' : '#b3b3b3'}}>Liked Songs</span>
         </Link>
       </footer>
+      <MusicPlayer />
     </div>
+    </PlayerProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { usePlayer } from "./PlayerContext";
 import "./MusicList.css";
 
 
@@ -46,6 +47,7 @@ const madeForYou = [
 ];
 
 const MusicList: React.FC = () => {
+  const { playSong } = usePlayer();
   return (
     <div className="home-hero-wrap">
       <section className="music-section">
@@ -55,7 +57,7 @@ const MusicList: React.FC = () => {
             <div className="music-h-card" key={idx}>
               <div className="music-h-cover-wrap">
                 <img className="music-h-cover" src={song.cover_url} alt={song.title} />
-                <button className="music-h-play">
+                <button className="music-h-play" onClick={() => playSong(song)}>
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
                 </button>
               </div>
@@ -74,7 +76,7 @@ const MusicList: React.FC = () => {
             <div className="music-h-card" key={idx}>
               <div className="music-h-cover-wrap">
                 <img className="music-h-cover" src={song.cover_url} alt={song.title} />
-                <button className="music-h-play">
+                <button className="music-h-play" onClick={() => playSong(song)}>
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="11" fill="#181818"/><polygon points="10,8 17,12 10,16" fill="#a259ff"/></svg>
                 </button>
               </div>
