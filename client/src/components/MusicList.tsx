@@ -195,3 +195,5 @@ const MusicList: React.FC = () => {
     </div>
   );
 }
+
+export default MusicList;
