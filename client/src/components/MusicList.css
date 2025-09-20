@@ -24,26 +24,28 @@
 /* Mobilnézet: nagyobb ikonok és borítók a Recently Played-ben */
 @media (max-width: 768px) {
   .recently-played-cover-wrap {
-    width: 110px;
-    height: 110px;
-    border-radius: 14px;
+    width: 90vw;
+    max-width: 170px;
+    height: 90vw;
+    max-height: 170px;
+    border-radius: 22px;
+    background: #181818;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 16px #0005;
   }
   .recently-played-cover {
-    width: 110px;
-    height: 110px;
-    border-radius: 14px;
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    object-fit: cover;
+    background: #222;
   }
   .music-h-card {
-    min-width: 120px !important;
-    max-width: 120px !important;
+    min-width: 100px !important;
+    max-width: 170px !important;
   }
   .music-horizontal-list {
-    gap: 10px !important;
-  }
-  .recently-played-cover-wrap svg,
-  .recently-played-cover-wrap button {
-    width: 38px !important;
-    height: 38px !important;
+    gap: 12px !important;
   }
 }
 .recently-played-cover-wrap {
