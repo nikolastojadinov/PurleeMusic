@@ -77,15 +77,13 @@ const MusicList: React.FC = () => {
           {recentlyPlayed.map((song, idx) => (
             <div className="music-h-card" key={idx} style={{display:'flex',flexDirection:'column',alignItems:'center',minWidth:150}}>
               <div
-                className="music-h-cover-wrap"
-                style={{width:150,height:150,marginBottom:10,cursor:'pointer',borderRadius:8,overflow:'hidden',boxShadow:'0 2px 16px #0007',position:'relative'}}
+                className="music-h-cover-wrap recently-played-cover-wrap"
                 onClick={() => openPlayerWithTrack && openPlayerWithTrack(song)}
               >
                 <img
-                  className="music-h-cover"
+                  className="music-h-cover recently-played-cover"
                   src={song.cover_url}
                   alt={song.title || "Album cover"}
-                  style={{width:150,height:150,objectFit:'cover',borderRadius:8,display:'block'}}
                 />
               </div>
               <div className="music-h-info" style={{width:'100%',textAlign:'center',marginTop:2}}>

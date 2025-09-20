@@ -1,3 +1,25 @@
+.recently-played-cover-wrap {
+  width: 130px;
+  height: 130px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #232323;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 16px #0007;
+  cursor: pointer;
+  position: relative;
+}
+
+.recently-played-cover {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
 /* suvišna zagrada uklonjena */
 .music-play-btn-inline:hover {
   background: #333;
