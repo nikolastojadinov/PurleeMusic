@@ -2,7 +2,6 @@
 import React from 'react';
 import './App.css';
 
-import MusicList from './components/MusicList';
 import RecentlyPlayed from './components/RecentlyPlayed';
 import MusicPlayer from './components/MusicPlayer';
 import { PlayerProvider } from './components/PlayerContext';
