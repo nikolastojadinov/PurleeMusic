@@ -2,7 +2,10 @@
 import React from 'react';
 import './App.css';
 import RecentlyPlayed from './components/RecentlyPlayed';
+import MusicPlayer from './components/MusicPlayer';
+import { PlayerProvider } from './components/PlayerContext';
 import './components/BottomNav.css';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
 const demoSongs = [
   {
@@ -24,10 +27,6 @@ const demoSongs = [
     coverUrl: "https://ofkfygqrfenctzitigae.supabase.co/storage/v1/object/public/Covers/76DD6929-0A2A-4D7C-8E09-86124174600A.png",
   },
 ];
-import MusicPlayer from './components/MusicPlayer';
-import { PlayerProvider } from './components/PlayerContext';
-import './components/BottomNav.css';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
 
 
