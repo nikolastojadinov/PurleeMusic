@@ -20,6 +20,54 @@
   border-radius: 16px;
   display: block;
 }
+
+/* Mobilnézet: nagyobb ikonok és borítók a Recently Played-ben */
+@media (max-width: 768px) {
+  .recently-played-cover-wrap {
+    width: 110px;
+    height: 110px;
+    border-radius: 14px;
+  }
+  .recently-played-cover {
+    width: 110px;
+    height: 110px;
+    border-radius: 14px;
+  }
+  .music-h-card {
+    min-width: 120px !important;
+    max-width: 120px !important;
+  }
+  .music-horizontal-list {
+    gap: 10px !important;
+  }
+  .recently-played-cover-wrap svg,
+  .recently-played-cover-wrap button {
+    width: 38px !important;
+    height: 38px !important;
+  }
+}
+.recently-played-cover-wrap {
+  width: 130px;
+  height: 130px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #232323;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 16px #0007;
+  cursor: pointer;
+  position: relative;
+}
+
+.recently-played-cover {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
 /* suvišna zagrada uklonjena */
 .music-play-btn-inline:hover {
   background: #333;
