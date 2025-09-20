@@ -3,6 +3,27 @@ import React from 'react';
 import './App.css';
 
 import RecentlyPlayed from './components/RecentlyPlayed';
+
+const demoSongs = [
+  {
+    id: 1,
+    title: "Retro Lounge",
+    artist: "PurpleMusic Artist",
+    coverUrl: "https://ofkfygqrfenctzitigae.supabase.co/storage/v1/object/public/Covers/F6897AAD-9902-4F0C-95EA-FD213A783D92.png",
+  },
+  {
+    id: 2,
+    title: "Deep Abstract Ambient",
+    artist: "PurpleMusic Artist",
+    coverUrl: "https://ofkfygqrfenctzitigae.supabase.co/storage/v1/object/public/Covers/621B279E-CA15-482E-849A-60D0774A9DD5.png",
+  },
+  {
+    id: 3,
+    title: "Running Night",
+    artist: "PurpleMusic Artist",
+    coverUrl: "https://ofkfygqrfenctzitigae.supabase.co/storage/v1/object/public/Covers/76DD6929-0A2A-4D7C-8E09-86124174600A.png",
+  },
+];
 import MusicPlayer from './components/MusicPlayer';
 import { PlayerProvider } from './components/PlayerContext';
 import './components/BottomNav.css';
@@ -71,7 +92,7 @@ function App() {
       {/* MAIN */}
       <main className="App-main" style={{flex:1}}>
         <Routes>
-          <Route path="/" element={<RecentlyPlayed />} />
+          <Route path="/" element={<RecentlyPlayed songs={demoSongs} />} />
           <Route path="/search" element={<div style={{textAlign:'center',marginTop:'3rem',fontSize:'1.3rem',color:'#fff'}}>Search Page</div>} />
           <Route path="/liked" element={<div style={{textAlign:'center',marginTop:'3rem',fontSize:'1.3rem',color:'#fff'}}>Liked Songs</div>} />
           <Route path="/playlists" element={<div style={{textAlign:'center',marginTop:'3rem',fontSize:'1.3rem',color:'#fff'}}>My Playlists</div>} />
