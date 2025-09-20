@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 
 import MusicList from './components/MusicList';
+import RecentlyPlayed from './components/RecentlyPlayed';
 import MusicPlayer from './components/MusicPlayer';
 import { PlayerProvider } from './components/PlayerContext';
 import './components/BottomNav.css';
@@ -71,7 +72,7 @@ function App() {
       {/* MAIN */}
       <main className="App-main" style={{flex:1}}>
         <Routes>
-          <Route path="/" element={<MusicList />} />
+          <Route path="/" element={<RecentlyPlayed />} />
           <Route path="/search" element={<div style={{textAlign:'center',marginTop:'3rem',fontSize:'1.3rem',color:'#fff'}}>Search Page</div>} />
           <Route path="/liked" element={<div style={{textAlign:'center',marginTop:'3rem',fontSize:'1.3rem',color:'#fff'}}>Liked Songs</div>} />
           <Route path="/playlists" element={<div style={{textAlign:'center',marginTop:'3rem',fontSize:'1.3rem',color:'#fff'}}>My Playlists</div>} />
