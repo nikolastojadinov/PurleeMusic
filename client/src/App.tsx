@@ -1,8 +1,11 @@
 
 import React from 'react';
 import './App.css';
-
 import RecentlyPlayed from './components/RecentlyPlayed';
+import MusicPlayer from './components/MusicPlayer';
+import { PlayerProvider } from './components/PlayerContext';
+import './components/BottomNav.css';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
 const demoSongs = [
   {
